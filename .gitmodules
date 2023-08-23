@@ -1,0 +1,3 @@
+[submodule "mpc_ros_description"]
+	path = mpc_ros_description
+	url = https://github.com/weemma/mpc_ros_description.git
