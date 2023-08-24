@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 import rospy
 
 from geometry_msgs.msg import Twist
@@ -259,7 +259,6 @@ def find_line_position(path_number, y):
 if __name__ == '__main__':
     rospy.init_node('path_node')
     rospy.loginfo("path_node is started!!")
-    global trajectory_type
     trajectory_type =  rospy.get_param('~trajectory_type')
     odom_sub = rospy.Subscriber('/odom', Odometry, odom_cb)
 

@@ -103,40 +103,40 @@ MPCNode::MPCNode()
     ros::NodeHandle pn("~");
 
     //Parameters for control loop
-    pn.param("thread_numbers", _thread_numbers, 2); // number of threads for this ROS node
-    pn.param("pub_twist_cmd", _pub_twist_flag, true);
-    pn.param("debug_info", _debug_info, true);
-    pn.param("delay_mode", _delay_mode, true);
-    pn.param("max_speed", _max_speed, 0.50); // unit: m/s
-    pn.param("waypoints_dist", _waypointsDist, -1.0); // unit: m
-    pn.param("path_length", _pathLength, 8.0); // unit: m
-    pn.param("goal_radius", _goalRadius, 0.5); // unit: m
-    pn.param("controller_freq", _controller_freq, 10);
+    pn.param("MPCPlannerROS/thread_numbers", _thread_numbers, 2); // number of threads for this ROS node
+    pn.param("MPCPlannerROS/pub_twist_cmd", _pub_twist_flag, true);
+    pn.param("MPCPlannerROS/debug_info", _debug_info, true);
+    pn.param("MPCPlannerROS/delay_mode", _delay_mode, true);
+    pn.param("MPCPlannerROS/max_speed", _max_speed, 0.50); // unit: m/s
+    pn.param("MPCPlannerROS/waypoints_dist", _waypointsDist, -1.0); // unit: m
+    pn.param("MPCPlannerROS/path_length", _pathLength, 8.0); // unit: m
+    pn.param("MPCPlannerROS/goal_radius", _goalRadius, 0.5); // unit: m
+    pn.param("MPCPlannerROS/controller_freq", _controller_freq, 10);
     //pn.param("vehicle_Lf", _Lf, 0.290); // distance between the front of the vehicle and its center of gravity
     _dt = double(1.0/_controller_freq); // time step duration dt in s 
 
     //Parameter for MPC solver
-    pn.param("mpc_steps", _mpc_steps, 20.0);
-    pn.param("mpc_ref_cte", _ref_cte, 0.0);
-    pn.param("mpc_ref_vel", _ref_vel, 1.0);
-    pn.param("mpc_ref_etheta", _ref_etheta, 0.0);
-    pn.param("mpc_w_cte", _w_cte, 5000.0);
-    pn.param("mpc_w_etheta", _w_etheta, 5000.0);
-    pn.param("mpc_w_vel", _w_vel, 1.0);
-    pn.param("mpc_w_angvel", _w_angvel, 100.0);
-    pn.param("mpc_w_angvel_d", _w_angvel_d, 10.0);
-    pn.param("mpc_w_accel", _w_accel, 50.0);
-    pn.param("mpc_w_accel_d", _w_accel_d, 10.0);
-    pn.param("mpc_max_angvel", _max_angvel, 3.0); // Maximal angvel radian (~30 deg)
-    pn.param("mpc_max_throttle", _max_throttle, 1.0); // Maximal throttle accel
-    pn.param("mpc_bound_value", _bound_value, 1.0e3); // Bound value for other variables
+    pn.param("MPCPlannerROS/mpc_steps", _mpc_steps, 20.0);
+    pn.param("MPCPlannerROS/mpc_ref_cte", _ref_cte, 0.0);
+    pn.param("MPCPlannerROS/mpc_ref_vel", _ref_vel, 1.0);
+    pn.param("MPCPlannerROS/mpc_ref_etheta", _ref_etheta, 0.0);
+    pn.param("MPCPlannerROS/mpc_w_cte", _w_cte, 5000.0);
+    pn.param("MPCPlannerROS/mpc_w_etheta", _w_etheta, 5000.0);
+    pn.param("MPCPlannerROS/mpc_w_vel", _w_vel, 1.0);
+    pn.param("MPCPlannerROS/mpc_w_angvel", _w_angvel, 100.0);
+    pn.param("MPCPlannerROS/mpc_w_angvel_d", _w_angvel_d, 10.0);
+    pn.param("MPCPlannerROS/mpc_w_accel", _w_accel, 50.0);
+    pn.param("MPCPlannerROS/mpc_w_accel_d", _w_accel_d, 10.0);
+    pn.param("MPCPlannerROS/mpc_max_angvel", _max_angvel, 3.0); // Maximal angvel radian (~30 deg)
+    pn.param("MPCPlannerROS/mpc_max_throttle", _max_throttle, 1.0); // Maximal throttle accel
+    pn.param("MPCPlannerROS/mpc_bound_value", _bound_value, 1.0e3); // Bound value for other variables
 
     //Parameter for topics & Frame name
-    pn.param<std::string>("global_path_topic", _globalPath_topic, "/move_base/TrajectoryPlannerROS/global_plan" );
-    pn.param<std::string>("goal_topic", _goal_topic, "/move_base_simple/goal" );
-    pn.param<std::string>("map_frame", _map_frame, "map" ); //*****for mpc, "odom"
-    pn.param<std::string>("odom_frame", _odom_frame, "odom");
-    pn.param<std::string>("car_frame", _car_frame, "base_footprint" );
+    pn.param<std::string>("MPCPlannerROS/global_path_topic", _globalPath_topic, "/move_base/TrajectoryPlannerROS/global_plan" );
+    pn.param<std::string>("MPCPlannerROS/goal_topic", _goal_topic, "/move_base_simple/goal" );
+    pn.param<std::string>("MPCPlannerROS/map_frame", _map_frame, "map" ); //*****for mpc, "odom"
+    pn.param<std::string>("MPCPlannerROS/odom_frame", _odom_frame, "odom");
+    pn.param<std::string>("MPCPlannerROS/car_frame", _car_frame, "base_footprint" );
 
     //Display the parameters
     cout << "\n===== Parameters =====" << endl;
